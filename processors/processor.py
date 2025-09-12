@@ -2,6 +2,11 @@ import os   #Módulo para navegar por los directorio de windows
 import json #Móduo para generar los archivos de formato .json
 from docx import Document   #Módulo para trabajar y leer documentos de fromato .docx (word)
 import typing
+import logging
+import sys
+
+logger = logging.getLogger(__name__)  #Manejo de errores y logs durante la ejecución del programa
+logging.basicConfig(filename="Debugging_logs.log", encoding='utf-8', level=logging.DEBUG)
 
 class DocumentProcessor:  #Clase para procesar documentos de tipo docx
     def __init__(self, path: str): #Constructor que recibe como atributos la ruta de los archivos .docx, y declara como atributos globales el nombre del archivo a procesar y el nombre de la entidad que será extraido en la ejecución del programa
@@ -82,13 +87,30 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
         }
         return result #retorna el json final
 
-# Uso
-new_file = DocumentProcessor("test_files/documento2.docx") #Se inicializa objeto de tipo DocumentProcessor, se le pasará como parámetro la ruta donde se encontraran los archivos
-resultado = new_file.docx_processor() #Con el mismo objeto se llama al método para procesar el archivo y exportar un json
 
-# Guardar JSON
-with open("output/output.json", "w", encoding="utf-8") as f:
-    json.dump(resultado, f, ensure_ascii=False, indent=4)
+def process_directory(input_dir, output_file = "output/output.json") -> bool:
+    all_documents = {"documents": []}
+    for file in os.listdir(input_dir):
+        if not file.endswith(".docx"):
+            logging.error(f"Archivo inválido (no .docx): {file}")
+            continue  
+        path = os.path.join(input_dir, file)
+        logging.info(f"Procesando archivo: {file}")
+        processor = DocumentProcessor(path)
+        result = processor.docx_processor()
+        all_documents["documents"].append(result)
+        logging.info(f"✅ Archivo procesado: {file}")
+    return True
+    
 
-# Debug
-print(resultado)
+
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(all_documents, f, ensure_ascii=False, indent=4)
+        
+    return all_documents
+
+
+#result = process_directory("C:/Users/esfe0/Documents/ESFE/semáforo_observaciones/test_files","../output/output.json")
+
+
+
