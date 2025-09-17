@@ -3,3 +3,4 @@ python-docx
 pdfplumber
 logging
 PySide6
+ollama

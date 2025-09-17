@@ -88,7 +88,14 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
         return result #retorna el json final
 
 
-def process_directory(input_dir, output_file = "output/output.json") -> bool:
+def process_directory(input_dir, input_file = None) -> bool:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+
+    if input_file is None:
+        input_file = os.path.join(base_dir, "../input/input.json")
+        input_file = os.path.abspath(input_file)  
+    
+    os.makedirs(os.path.dirname(input_file), exist_ok=True)
     all_documents = {"documents": []}
     for file in os.listdir(input_dir):
         if not file.endswith(".docx"):
@@ -99,15 +106,13 @@ def process_directory(input_dir, output_file = "output/output.json") -> bool:
         processor = DocumentProcessor(path)
         result = processor.docx_processor()
         all_documents["documents"].append(result)
-        logging.info(f"✅ Archivo procesado: {file}")
-    return True
-    
+        logging.info(f"// Archivo procesado: {file}")
 
-
-    with open(output_file, "w", encoding="utf-8") as f:
+    with open(input_file, "w", encoding="utf-8") as f:
         json.dump(all_documents, f, ensure_ascii=False, indent=4)
         
-    return all_documents
+    return True
+
 
 
 #result = process_directory("C:/Users/esfe0/Documents/ESFE/semáforo_observaciones/test_files","../output/output.json")
