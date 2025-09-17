@@ -108,11 +108,12 @@ def process_directory(input_dir, input_file = None) -> bool:
         all_documents["documents"].append(result)
         logging.info(f"// Archivo procesado: {file}")
 
-    with open(input_file, "w", encoding="utf-8") as f:
-        json.dump(all_documents, f, ensure_ascii=False, indent=4)
-        
+    try:
+        with open(input_file, "w", encoding="utf-8") as f:
+            json.dump(all_documents, f, ensure_ascii=False, indent=4)
+    except:
+        return False
     return True
-
 
 
 #result = process_directory("C:/Users/esfe0/Documents/ESFE/semáforo_observaciones/test_files","../output/output.json")

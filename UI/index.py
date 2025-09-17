@@ -10,6 +10,7 @@ import logging
 from processors.processor import process_directory
 
 
+
 class QTextEditLogger(logging.Handler):
     def __init__(self, text_edit: QTextEdit):
         super().__init__()
@@ -101,12 +102,14 @@ class MainWindow(QMainWindow):
         logging.getLogger().addHandler(self.log_handler)
         logging.getLogger().setLevel(logging.INFO)
 
-        if not self.files_to_process:  # Validación
+        if not self.files_to_process: 
             self.results.setText("No hay carpeta seleccionada.")
             return
         print(self.files_to_process)
         has_endend = process_directory(self.files_to_process) #variable que recibe un booleano para saber si el procesado ha acabado
-
         self.results.append("✅ Todos los documentos procesados.")
+        if has_endend:
+            from main import ai_summarizing_ui
+            ai_summarizing_ui()
 
 
