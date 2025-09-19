@@ -4,3 +4,4 @@ pdfplumber
 logging
 PySide6
 ollama
+threading

@@ -1,0 +1,10 @@
+
+--------------------- Numero de observación: 1 ---------------------
+Observación Fiscal Resumida:
+
+La entidad fiscalizada incumple con las obligaciones fiscales establecidas por los artículos 86 fracción II, 29 párrafo primero y 29-A del CFF en relación a la LISR. Específicamente, no emitió Comprobantes Fiscalizados Digitales (CFDI's) para validar sus ingresos propios recaudados durante los primeros cinco meses de 2024 ($134,630,707.10), derivado del incumplimiento en la expedición y recabamiento de dichos comprobantes digitales a través de internet para las erogaciones o servicios prestados, según lo evidenciado por sus propios registros presentados en el Acta Circunstanciada Parcial del Proceso de Fiscalización Superior número: 002/CP2024/JAPAM.
+
+--------------------- Numero de observación: 2 ---------------------
+Aquí tienes el resumen conciso pero detallado:
+
+Se identificó una falta grave documental durante la fiscalización, específicamente un incumplimiento en la obligación de expedir Comprobantes Fiscales Digitales por Internet (CFDI) para los pagos recibidos. Se detectaron 18 CFDIs de pago generados con desfaces (diferencias entre el monto del gasto y el pago documentado) que variaron desde 2 hasta 374 días naturales, respecto a la regla establecida por el SAT para expedirlos al quinto día natural del mes siguiente. Estos CFDIs corresponden a transacciones con 9 proveedores (BPA2212022T7, BSM221019JJ2, CRE190813EJA, FEAI891005591, HST1810239K1, PEB2008214J1, PICH770322Q32, QUHJ711021UR1 y SCB210125FQ0) y un importe total de $4,684,279.63 (M.N.). El ente fiscalizado no acreditó la existencia oportuna de esta documentación para sus 18 erogaciones realizadas con recursos propios en el ejercicio fiscal 2024, lo que configura una posible falta al artículo 29 fracción I del Código Fiscal de la Federación.

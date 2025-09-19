@@ -123,3 +123,59 @@ INFO:root:Procesando archivo: documento.docx
 INFO:root:// Archivo procesado: documento.docx
 INFO:root:Procesando archivo: documento2.docx
 INFO:root:// Archivo procesado: documento2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
