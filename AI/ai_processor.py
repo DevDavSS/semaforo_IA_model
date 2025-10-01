@@ -14,6 +14,26 @@ class ai_processor:
 class summarize_ai(ai_processor):
     def __init__(self):
         super().__init__()
+    
+
+    def cataloj_iteration(self, cataloj_path = None, observation_id = None):
+        global base_dir
+        if cataloj_path is None:
+            cataloj_path = os.path.join(base_dir, "../tools/cataloj.json")
+            cataloj_path = os.path.abspath(cataloj_path)
+        
+        with open(cataloj_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            #En esta iteración se puede modificar en el caso de que la severidad no se obtenga en la parte del subtema.
+            for cap in data["audit_catalog"]:
+                for theme in cap["chapter_themes"]:
+                    for subtheme in theme["theme_subthemes"]:
+                        
+                        id = subtheme["subtheme_id"]
+                        severity = subtheme["severity"]
+                        if re.sub(r"\D", "",id) == re.sub(r"\D", "",observation_id):
+                            return severity
+
 
     def summarize_observation(self, input_path=None, output_path=None, progress_callback=None, log_callback=None):
         global base_dir
@@ -34,7 +54,10 @@ class summarize_ai(ai_processor):
         for doc in data["documents"]:
             for obs in doc["observations_fetched"]:
                 texto = obs["observation"]
-
+                id = obs["subtheme"]  #normalizar id para futura comparación con catálogo de auditorias
+                id = re.findall(r"[0-9.]+", id)
+                id_subtheme = "".join(id)
+                severity = self.cataloj_iteration(observation_id=id_subtheme)
                 prompt = f"""
                 El texto anteriormente proveído, es una observación fiscal hacia una entidad fiscalizada, necesito que hagas un resumen breve pero detallado de la situación y el problema que se está identificando en la observación, no debe ser largo el resumen, pero si conciso y los más detallado posible en montos, contrataciones, servicios, etc. Todo hazlo en un párrafo
                 La siguiente observación: {texto}
@@ -48,11 +71,20 @@ class summarize_ai(ai_processor):
                 ])
 
                 raw_output = response["message"]["content"]
+
+                # Extraccion de el contenido de <think> en una variable (pensamiento de la IA)
+                think_match = re.search(r"<think>(.*?)</think>", raw_output, flags=re.DOTALL)
+                think_content = think_match.group(1).strip() if think_match else ""
+
+                # Limpiar la salida principal quitando <think>...</think> y asteriscos
                 clean_output = re.sub(r"<think>.*?</think>|\*", "", raw_output, flags=re.DOTALL).strip()
+                #clean_output = re.sub(r"<think>.*?</think>|\*", "", raw_output, flags=re.DOTALL).strip()
 
                 obs["summary"] = clean_output
+                obs["think"] = think_content
+                obs["severity"] = severity
 
-            processed_docs += 1
+            processed_docs += 1 #Linea para progreso en la UI
             if progress_callback:
                 progress_callback(int((processed_docs / total_docs) * 100))
 
@@ -77,9 +109,15 @@ class summarize_ai(ai_processor):
                     for obs in doc["observations_fetched"]:
                         no_observation = obs["no_observation"]
                         summary = obs["summary"]
+                        thinking = obs["think"]
+                        severity = obs["severity"]
+                        severity = f"\n {severity} \n"
                         title = f"\n--------------------- Numero de observación: {no_observation} ---------------------\n"
+                        thinking_text = f"\n--Razonmiento de la IA: {thinking}"
                         fw.write(title)
-                        fw.write(summary + "\n")
+                        fw.write(thinking_text)
+                        fw.write(severity)
+                        fw.write(summary)
 
 
 def start_ai_processor(progress_callback=None, log_callback=None) -> bool:
@@ -92,6 +130,6 @@ def start_ai_processor(progress_callback=None, log_callback=None) -> bool:
         summarize_ai.convert_to_txt()
     except Exception as e:
         if log_callback:
-            log_callback(f"❌ Error en la IA: {e}")
+            log_callback(f" Error en la IA: {e}")
         return False
     return True

@@ -1,10 +1,37 @@
 
 --------------------- Numero de observación: 1 ---------------------
-Observación Fiscal Resumida:
 
-La entidad fiscalizada incumple con las obligaciones fiscales establecidas por los artículos 86 fracción II, 29 párrafo primero y 29-A del CFF en relación a la LISR. Específicamente, no emitió Comprobantes Fiscalizados Digitales (CFDI's) para validar sus ingresos propios recaudados durante los primeros cinco meses de 2024 ($134,630,707.10), derivado del incumplimiento en la expedición y recabamiento de dichos comprobantes digitales a través de internet para las erogaciones o servicios prestados, según lo evidenciado por sus propios registros presentados en el Acta Circunstanciada Parcial del Proceso de Fiscalización Superior número: 002/CP2024/JAPAM.
+--Razonmiento de la IA: Vale, vamos a abordar el texto proporcionado sobre la observación fiscal. Primero, identifico que se mencionan varios artículos de la Ley del Impuesto Sobre la Renta (LISR) y el Código Fiscal de la Federación (CFF). Específicamente, los artículos 86 fracción II, 29 párrafo primero y 29-A.
 
+El artículo 86 fracción II habla sobre la obligación para personas morales de expedir comprobantes fiscales que acrediten enajenaciones y erogaciones. Luego, el artículo 29 del CFF establece que los contribuyentes deben emitir estos comprobantes mediante documentos digitales por Internet usando el SAT.
+
+En este caso, la observación es sobre una entidad fiscalizada que no emiteó los CFDIs para sus ingresos de enero a mayo de 2024. El monto total involucrado es de $134,630,707.10, según el anexo "INGRESOS SIN CFDI's".
+
+La evidencia proviene del Acta Circunstanciada Parcial número: 002/CP2024/JAPAM, fechado el 04 de abril de 2025. Se revisaron los registros en la base de datos que muestran ingresos propios, tarifas aplicables y pólizas sustentatorias sin los CFDIs requeridos.
+
+El problema principal es falta de cumplimiento normativo: no expedición de CFDIs por parte de una entidad. Esto implica posible incumplimiento en la obligación tributaria y contable, lo que podría afectar su situación fiscal. La necesidad del contribuyente es tener los comprobantes para demostrar las transacciones fiscales.
+
+También considero si hay implicaciones legales más allá de multas o sanciones fiscales. Posiblemente, esto afecta la transparencia en cuentas públicas y puede requerir ajustes contables posteriores, como provisiones por impagos potenciales o ajustes en el ISR.
+
+Verifico si los puntos del acta corresponden a las secciones donde falta evidencia de CFDIs. El anexo proporciona los detalles específicos de los ingresos sin comprobantes, lo que respalda la observación fiscal.
+
+Finalmente, resumo todo esto concisamente: el incumplimiento normativo en emisión de CFDIs por una entidad fiscalizada durante 2024 (enero-mayo), con montos específicos y evidencia documental proporcionada.
+ medium 
+Observación Fiscal
+
+La observación señala un incumplimiento normativo grave en la entidad fiscalizada, que no emiteó los CFDI's correspondientes a sus propios ingresos recaudados entre enero y mayo de 2024. El monto total afectado es $134,630,707.10, conforme al artículo 86 fracción II, el 29 párrafo primero y el 29-A del CFF/LISR, lo que impide la correcta sustentación fiscal de dichos ingresos ($134 millones 630 mil 707 pesos con 10/100 M.N.). La evidencia está contenida en el Anexo 1 ("INGRESOS SIN CFDI's") y fue proporcionada mediante la Acta Circunstanciada Parcial del Proceso de Fiscalización Superior N°: 002/CP2024/JAPAM, específicamente en los puntos 12, 13 y 38.
 --------------------- Numero de observación: 2 ---------------------
-Aquí tienes el resumen conciso pero detallado:
 
-Se identificó una falta grave documental durante la fiscalización, específicamente un incumplimiento en la obligación de expedir Comprobantes Fiscales Digitales por Internet (CFDI) para los pagos recibidos. Se detectaron 18 CFDIs de pago generados con desfaces (diferencias entre el monto del gasto y el pago documentado) que variaron desde 2 hasta 374 días naturales, respecto a la regla establecida por el SAT para expedirlos al quinto día natural del mes siguiente. Estos CFDIs corresponden a transacciones con 9 proveedores (BPA2212022T7, BSM221019JJ2, CRE190813EJA, FEAI891005591, HST1810239K1, PEB2008214J1, PICH770322Q32, QUHJ711021UR1 y SCB210125FQ0) y un importe total de $4,684,279.63 (M.N.). El ente fiscalizado no acreditó la existencia oportuna de esta documentación para sus 18 erogaciones realizadas con recursos propios en el ejercicio fiscal 2024, lo que configura una posible falta al artículo 29 fracción I del Código Fiscal de la Federación.
+--Razonmiento de la IA: Vale, el usuario me está pidiendo un resumen conciso pero detallado de una observación fiscal. Primero necesito entender bien la consulta: quiere que extraiga información clave sobre montos, proveedores, servicios sin hacerlo demasiado largo.
+
+La observación habla sobre problemas con documentación fiscal en 2024 - específicamente falta de comprobantes para 18 transacciones de pago. Los montos totales mencionados son $4.68 millones aproximadamente. La parte más importante es que hay 9 proveedores involucrados, y los CFDIs correspondientes no fueron expedidos en tiempo oportuno.
+
+El usuario probablemente necesita este resumen para una presentación fiscal o auditoría formal, así que debo mantenerlo preciso pero claro. Identificaré solo lo esencial: la base legal (Regla 2.7.1.32 y artículo 29 CFF), los números clave (18 comprobantes con deficiencias totales $4.68M) y los proveedores específicos sin detalles adicionales.
+
+Como hay documentos adjuntos, debo mencionarlos pero no profundizar en el análisis. El resumen debe ser una versión mejorada que capte toda la relevancia del texto original usando un formato lógico: incumplimiento → montos → proveedores → servicio → consecuencia.
+ medium 
+Observación fiscal
+
+La entidad fiscalizada presenta una falta documental crítica durante su ejercicio fiscal 2024, al no acreditar que obtuvo los comprobantes fiscales digitales (CFDI) respectivos para los bienes y servicios adquiridos en relación con 18 transacciones de pago identificadas. Estas transacciones involucran un total de $4,684,279.63 ($4.68 millones), generados por 9 proveedores (BPA, BSM, CRE, FEAI, HST, PEB, PICH, QUHJ, SCB). Específicamente, los CFDIs complementarios de recepción de pagos correspondientes a estos movimientos no fueron expedidos dentro del plazo legal de 5 días naturales máximo contados desde los pagos recibidos (Regla 2.7.1.32), lo que resulta en una deficiencia documental grave.
+
+Este problema se identificó revisando la cuenta pública y sustentado en movimientos auxiliares y pólizas, siendo resultado de no cumplir con el deber de obtener los CFDIs oportunos conforme al artículo 29 párrafo primero del Código Fiscal de la Federación.

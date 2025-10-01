@@ -30,7 +30,7 @@ class WorkerSignals(QObject):
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Dashboard estilo VS Code")
+        self.setWindowTitle("Semaforizador de Observaciones")
         self.resize(1000, 600)
 
         central_widget = QWidget()
@@ -64,7 +64,7 @@ class MainWindow(QMainWindow):
         # ---------------- CONTENIDO ----------------
         content_layout = QHBoxLayout()
 
-        # Resultados
+        # Resultados y logs text area
         self.results = QTextEdit()
         self.results.setReadOnly(True)
         self.results.setFont(font_result)
