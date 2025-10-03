@@ -1,103 +1,84 @@
-import ollama
-import json
-import re
-import os
+
+import os, json
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-class ai_processor:
-    def __init__(self):
-        self.model = "deepseek-r1:8b"
+def add_border(cell, border="top"):
+    """Agrega borde a una celda (para separar secciones)"""
+    tc = cell._tc
+    tcPr = tc.get_or_add_tcPr()
+    borders = tcPr.first_child_found_in("w:tcBorders")
+    if borders is None:
+        borders = OxmlElement('w:tcBorders')
+        tcPr.append(borders)
 
+    element = OxmlElement(f"w:{border}")
+    element.set(qn("w:val"), "single")
+    element.set(qn("w:sz"), "12")      # grosor
+    element.set(qn("w:space"), "0")
+    element.set(qn("w:color"), "000000")
+    borders.append(element)
 
-class summarize_ai(ai_processor):
-    def __init__(self):
-        super().__init__(self)
-    
+def set_cell_font(cell, size=9, bold=False):
+    """Aplica formato de letra a todo el texto dentro de una celda"""
+    for paragraph in cell.paragraphs:
+        for run in paragraph.runs:
+            run.font.size = Pt(size)
+            run.font.bold = bold
+            run.font.color.rgb = RGBColor(0, 0, 0)
 
-    def cataloj_iteration(self, cataloj_path = None, observation_id = None):
-        global base_dir
-        if cataloj_path is None:
-            cataloj_path = os.path.join(base_dir, "../tools/cataloj.json")
-            cataloj_path = os.path.abspath(cataloj_path)
-        
-        with open(cataloj_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            #En esta iteración se puede modificar en el caso de que la severidad no se obtenga en la parte del subtema.
-            for cap in data["audit_catalog"]:
-                for theme in cap["chapter_themes"]:
-                    for subtheme in theme["theme_subthemes"]:
-                        
-                        id = subtheme["subtheme_id"]
-                        severity = subtheme["severity"]
-                        if re.sub(r"\D", "",id) == re.sub(r"\D", "",observation_id):
-                            return severity
+def convert_to_docx(summarized_path=None, items_path=None):  
+    global base_dir
+    if summarized_path is None:
+        summarized_path = os.path.join(base_dir, "../output/output_with_summaries.json")
+        summarized_path = os.path.abspath(summarized_path)
+    if items_path is None:
+        items_path = os.path.join(base_dir, "../items/")
+        items_path = os.path.abspath(items_path)
 
-
-    def summarize_observation(self, input_path=None, output_path=None, progress_callback=None, log_callback=None):
-        global base_dir
-
-        if input_path is None:
-            input_path = os.path.join(base_dir, "../input/input.json")
-            input_path = os.path.abspath(input_path)
-        if output_path is None:
-            output_path = os.path.join(base_dir, "../output/output_with_summaries.json")
-            output_path = os.path.abspath(output_path)
-
-        with open(input_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        total_docs = len(data["documents"])
-        processed_docs = 0
+    with open(summarized_path, "r", encoding="utf-8") as fr:
+        data = json.load(fr)
 
         for doc in data["documents"]:
+            # Crear documento Word
+            document = Document()
+            
+            # Título del documento
+            document.add_heading(f"Resultados de {doc['filename']}", level=1)
+
+            # Crear tabla de una sola columna
+            table = document.add_table(rows=0, cols=1)
+            table.style = "Light Grid Accent 1"
+
+            # Agregar observaciones
             for obs in doc["observations_fetched"]:
-                texto = obs["observation"]
-                id = obs["subtheme"]  #normalizar id para futura comparación con catálogo de auditorias
-                id = re.findall(r"[0-9.]+", id)
-                id_subtheme = "".join(id)
-                severity = self.cataloj_iteration(observation_id=id_subtheme)
- 
+                # 1) Número de observación
+                row1 = table.add_row().cells
+                row1[0].text = f"OBSERVACIÓN N° {obs['no_observation']}"
+                add_border(row1[0], "top")
+                set_cell_font(row1[0], size=9)
 
-    @staticmethod
-    def convert_to_txt(summarized_path=None, items_path=None):
-        global base_dir
-        if summarized_path is None:
-            summarized_path = os.path.join(base_dir, "../output/output_with_summaries.json")
-            summarized_path = os.path.abspath(summarized_path)
-        if items_path is None:
-            items_path = os.path.join(base_dir, "../items/")
-            items_path = os.path.abspath(items_path)
+                # 2) Pensamiento IA
+                row2 = table.add_row().cells
+                row2[0].text = f"Razonamiento de la IA:\n{obs['think']}"
+                set_cell_font(row2[0], size=9)
 
-        with open(summarized_path, "r", encoding="utf-8") as fr:
-            data = json.load(fr)
-            for doc in data["documents"]:
-                filename = os.path.splitext(doc["filename"])[0] + ".txt"
-                with open(os.path.join(items_path, filename), "w", encoding="utf-8") as fw:
-                    for obs in doc["observations_fetched"]:
-                        no_observation = obs["no_observation"]
-                        summary = obs["summary"]
-                        thinking = obs["think"]
-                        severity = obs["severity"]
-                        severity = f"\n {severity} \n"
-                        title = f"\n--------------------- Numero de observación: {no_observation} ---------------------\n"
-                        thinking_text = f"\n--Razonmiento de la IA: {thinking}"
-                        fw.write(title)
-                        fw.write(thinking_text)
-                        fw.write(severity)
-                        fw.write(summary)
+                # 3) Severidad
+                row3 = table.add_row().cells
+                row3[0].text = f"Nivel de Severidad: {obs['severity']}"
+                set_cell_font(row3[0], size=9)
 
+                # 4) Resumen (negritas)
+                row4 = table.add_row().cells
+                p = row4[0].paragraphs[0]
+                run = p.add_run(f"Resumen:\n{obs['summary']}")
+                run.bold = True
+                run.font.size = Pt(9)
+                run.font.color.rgb = RGBColor(0, 0, 0)
 
-def start_ai_processor(progress_callback=None, log_callback=None) -> bool:
-    try:
-        ai_comander = summarize_ai()
-        ai_comander.summarize_observation(
-            progress_callback=progress_callback,
-            log_callback=log_callback
-        )
-        summarize_ai.convert_to_txt()
-    except Exception as e:
-        if log_callback:
-            log_callback(f" Error en la IA: {e}")
-        return False
-    return True
+            # Guardar DOCX
+            filename = os.path.splitext(doc["filename"])[0] + ".docx"
+            output_path = os.path.join(items_path, filename)
+            document.save(output_path)
+
+convert_to_docx()

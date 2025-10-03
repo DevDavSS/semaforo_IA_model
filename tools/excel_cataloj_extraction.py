@@ -1,11 +1,9 @@
 import pandas as pd
 import json
 
-# Asumiendo que el archivo Excel se llama 'Libro1.xlsx' y la hoja es 'Hoja1'.
-# Si el archivo no existe, puedes crearlo a partir del contenido proporcionado.
 # Pandas manejará NaN para celdas vacías.
 
-df = pd.read_excel('audit_cat.xlsx')
+df = pd.read_excel('new_audit_cataloj.xlsx')
 
 # Eliminar filas donde 'NÚMERO' esté vacío o NaN
 df = df.dropna(subset=['NÚMERO'])
@@ -56,7 +54,7 @@ for index, row in df.iterrows():
             "subtheme": str(row['SUBTEMA']) if not pd.isna(row['SUBTEMA']) else "",
             "subtheme_id": numero,
             "subtheme_procedures": [],
-            "severity": "medium" 
+
         }
         current_theme['theme_subthemes'].append(current_subtheme)
     
@@ -65,14 +63,15 @@ for index, row in df.iterrows():
         if current_subtheme is None:
             continue  # Error si no hay subtema previo
         procedure = {
+            "id_procedure": numero,
             "procedure": str(row['PROCEDIMIENTO']) if not pd.isna(row['PROCEDIMIENTO']) else "",
             "description_cases_noncompliance": str(row['DESCRIPCIÓN SUPUESTOS DE INCUMPLIMIENTO']) if not pd.isna(row['DESCRIPCIÓN SUPUESTOS DE INCUMPLIMIENTO']) else "",
-            "normative": f"{str(row['MARCO NORMATIVO']) if not pd.isna(row['MARCO NORMATIVO']) else ''} {str(row['ARTÍCULOS DE LA LEY PARA INCUMPLIMIENTO']) if not pd.isna(row['ARTÍCULOS DE LA LEY PARA INCUMPLIMIENTO']) else ''}".strip()
-            
+            "normative": f"{str(row['MARCO NORMATIVO']) if not pd.isna(row['MARCO NORMATIVO']) else ''} {str(row['ARTÍCULOS DE LA LEY PARA INCUMPLIMIENTO']) if not pd.isna(row['ARTÍCULOS DE LA LEY PARA INCUMPLIMIENTO']) else ''}".strip(),
+            "severity": "--" #futura lógica para la implementación del nivel de severidad mediante un diccionario que asiganará los niveles de severidad.
         }
         current_subtheme['subtheme_procedures'].append(procedure)
 
-# Crear el JSON final
+# Crearcion de json
 json_output = {"audit_catalog": audit_catalog}
 
 # Imprimir o guardar el JSON

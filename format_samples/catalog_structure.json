@@ -13,6 +13,7 @@
                             "subtheme_id": "subtheme_id",
                             "subtheme_procedures":[
                                 {
+                                    "id_procedure": "procedure_id",                                    
                                     "procedure":"procedure_description",
                                     "description_cases_noncompliance":"description_cases_noncompliance_text",
                                     "normative":"normatividad",
@@ -38,6 +39,7 @@
                             "subtheme_id": "subtheme_id",
                             "subtheme_procedures":[
                                 {
+                                    "id_procedure":"procedure_id",                                    
                                     "procedure":"procedure_description",
                                     "description_cases_noncompliance":"description_cases_noncompliance_text",
                                     "normative":"normatividad",

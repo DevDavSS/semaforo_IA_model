@@ -9,6 +9,7 @@
           "chapter": "1.0.0 Ingresos y Otros Beneficios",
           "theme": "1.2.0 Ingresos autorizados",
           "subtheme": "1.2.1 Tarifas publicadas",
+          "procedure": "1.2.1.2",
           "observation": "Texto de la observación...",
           "legal": null
         },
@@ -17,6 +18,7 @@
           "chapter": "2.0.0 Egresos y Adquisiciones",
           "theme": "2.1.0 Compras",
           "subtheme": "2.1.1 Proveedores",
+          "procedure": "1.2.1.2",
           "observation": "Texto de la observación...",
           "legal": null
         }
@@ -31,6 +33,7 @@
           "chapter": "3.0.0 Programas Sociales",
           "theme": "3.1.0 Subsidios",
           "subtheme": "3.1.2 Entregas irregulares",
+          "procedure": "1.2.1.2",
           "observation": "Texto de la observación...",
           "legal": null
         }

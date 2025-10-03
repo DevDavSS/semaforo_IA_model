@@ -2,21 +2,31 @@ import ollama
 import json
 import re
 import os
-import logging
+import configparser
+import subprocess
+import platform
+from .result_docx import convert_to_docx
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
+config = configparser.ConfigParser()
+config.read(os.path.join(base_dir, "../config.conf"), encoding="utf-8")
 
 class ai_processor:
-    def __init__(self):
-        self.model = "deepseek-r1:8b"
-
+    def kill_ollama(self):
+        try:
+            system = platform.system()
+            if system == "Windows":
+                subprocess.run(["taskkill", "/IM", "ollama.exe", "/F"], check=False)
+            else:
+                subprocess.run(["pkill", "-f", "ollama"], check=False)
+        except Exception as e:
+            print(f"Unable to kill Ollama: {e}")
 
 class summarize_ai(ai_processor):
     def __init__(self):
         super().__init__()
-    
 
-    def cataloj_iteration(self, cataloj_path = None, observation_id = None):
+    def cataloj_iteration(self, cataloj_path=None, procedure_id=None):
         global base_dir
         if cataloj_path is None:
             cataloj_path = os.path.join(base_dir, "../tools/cataloj.json")
@@ -24,19 +34,20 @@ class summarize_ai(ai_processor):
         
         with open(cataloj_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-            #En esta iteración se puede modificar en el caso de que la severidad no se obtenga en la parte del subtema.
             for cap in data["audit_catalog"]:
                 for theme in cap["chapter_themes"]:
                     for subtheme in theme["theme_subthemes"]:
-                        
-                        id = subtheme["subtheme_id"]
-                        severity = subtheme["severity"]
-                        if re.sub(r"\D", "",id) == re.sub(r"\D", "",observation_id):
-                            return severity
-
+                        for procedure in subtheme["subtheme_procedures"]:     
+                            id = procedure["id_procedure"]
+                            if re.sub(r"\D", "", id) == re.sub(r"\D", "", procedure_id):
+                                severity = procedure["severity"]
+                                return severity
 
     def summarize_observation(self, input_path=None, output_path=None, progress_callback=None, log_callback=None):
         global base_dir
+
+        config_prompt = config["settings"].get("ai_generative_prompt")
+        config_model = config["settings"].get("model")
 
         if input_path is None:
             input_path = os.path.join(base_dir, "../input/input.json")
@@ -50,75 +61,59 @@ class summarize_ai(ai_processor):
 
         total_docs = len(data["documents"])
         processed_docs = 0
+        processed_data = {"documents": []}  # To store processed documents for JSON output
 
         for doc in data["documents"]:
+            if log_callback:
+                log_callback(f"Procesando documento: {doc['filename']}...")
+
             for obs in doc["observations_fetched"]:
                 texto = obs["observation"]
-                id = obs["subtheme"]  #normalizar id para futura comparación con catálogo de auditorias
+                id = obs["procedure"]
                 id = re.findall(r"[0-9.]+", id)
-                id_subtheme = "".join(id)
-                severity = self.cataloj_iteration(observation_id=id_subtheme)
-                prompt = f"""
-                El texto anteriormente proveído, es una observación fiscal hacia una entidad fiscalizada, necesito que hagas un resumen breve pero detallado de la situación y el problema que se está identificando en la observación, no debe ser largo el resumen, pero si conciso y los más detallado posible en montos, contrataciones, servicios, etc. Todo hazlo en un párrafo
-                La siguiente observación: {texto}
-                """
+                id_procedure = "".join(id)
+                severity = self.cataloj_iteration(procedure_id=id_procedure)
+
+                prompt = f"{config_prompt.strip()} {texto.strip()}"
 
                 if log_callback:
                     log_callback(f"Enviando observación a la IA: {texto[:50]}...")
 
-                response = ollama.chat(model="deepseek-r1:8b", messages=[
+                response = ollama.chat(model=config_model, messages=[
                     {"role": "user", "content": prompt}
                 ])
 
                 raw_output = response["message"]["content"]
-
-                # Extraccion de el contenido de <think> en una variable (pensamiento de la IA)
                 think_match = re.search(r"<think>(.*?)</think>", raw_output, flags=re.DOTALL)
                 think_content = think_match.group(1).strip() if think_match else ""
-
-                # Limpiar la salida principal quitando <think>...</think> y asteriscos
                 clean_output = re.sub(r"<think>.*?</think>|\*", "", raw_output, flags=re.DOTALL).strip()
-                #clean_output = re.sub(r"<think>.*?</think>|\*", "", raw_output, flags=re.DOTALL).strip()
 
                 obs["summary"] = clean_output
                 obs["think"] = think_content
                 obs["severity"] = severity
 
-            processed_docs += 1 #Linea para progreso en la UI
+            # Generate .docx for this document immediately
+            items_path = os.path.join(base_dir, "../items/")
+            items_path = os.path.abspath(items_path)
+            convert_to_docx(doc_data=doc, items_path=items_path)
+            if log_callback:
+                log_callback(f"Generado archivo DOCX para: {doc['filename']}")
+
+            # Append to processed data for JSON output
+            processed_data["documents"].append(doc)
+
+            processed_docs += 1
             if progress_callback:
                 progress_callback(int((processed_docs / total_docs) * 100))
 
+        # Save all processed documents to JSON
         with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+            json.dump(processed_data, f, ensure_ascii=False, indent=4)
 
     @staticmethod
-    def convert_to_txt(summarized_path=None, items_path=None):
-        global base_dir
-        if summarized_path is None:
-            summarized_path = os.path.join(base_dir, "../output/output_with_summaries.json")
-            summarized_path = os.path.abspath(summarized_path)
-        if items_path is None:
-            items_path = os.path.join(base_dir, "../items/")
-            items_path = os.path.abspath(items_path)
-
-        with open(summarized_path, "r", encoding="utf-8") as fr:
-            data = json.load(fr)
-            for doc in data["documents"]:
-                filename = os.path.splitext(doc["filename"])[0] + ".txt"
-                with open(os.path.join(items_path, filename), "w", encoding="utf-8") as fw:
-                    for obs in doc["observations_fetched"]:
-                        no_observation = obs["no_observation"]
-                        summary = obs["summary"]
-                        thinking = obs["think"]
-                        severity = obs["severity"]
-                        severity = f"\n {severity} \n"
-                        title = f"\n--------------------- Numero de observación: {no_observation} ---------------------\n"
-                        thinking_text = f"\n--Razonmiento de la IA: {thinking}"
-                        fw.write(title)
-                        fw.write(thinking_text)
-                        fw.write(severity)
-                        fw.write(summary)
-
+    def convert_to_docx_handler():
+        # This method can be deprecated or kept for compatibility
+        pass
 
 def start_ai_processor(progress_callback=None, log_callback=None) -> bool:
     try:
@@ -127,9 +122,10 @@ def start_ai_processor(progress_callback=None, log_callback=None) -> bool:
             progress_callback=progress_callback,
             log_callback=log_callback
         )
-        summarize_ai.convert_to_txt()
+        # No need to call convert_to_docx_handler here, as DOCX is generated per document
+        ai_comander.kill_ollama()  # Kill Ollama process after all processing
+        return True
     except Exception as e:
         if log_callback:
-            log_callback(f" Error en la IA: {e}")
+            log_callback(f"Error en la IA: {e}")
         return False
-    return True

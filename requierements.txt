@@ -5,4 +5,7 @@ logging
 PySide6
 ollama
 threading
-pandass
+pandas
+configparser
+subprocess
+platform

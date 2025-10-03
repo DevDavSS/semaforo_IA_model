@@ -1,9 +1,8 @@
 import os   #Módulo para navegar por los directorio de windows
 import json #Móduo para generar los archivos de formato .json
 from docx import Document   #Módulo para trabajar y leer documentos de fromato .docx (word)
-import typing
 import logging
-import sys
+
 
 logger = logging.getLogger(__name__)  #Manejo de errores y logs durante la ejecución del programa
 logging.basicConfig(filename="Debugging_logs.log", encoding='utf-8', level=logging.DEBUG)
@@ -53,7 +52,7 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
             lines = chunk.strip().split("\n") #Desde la lina de codigo No.41 se estableció que cada seccion de las tablas o párrafos se depararán con un \n al momenot de concatenar todos los elementos del arreglo total_text, en esta linea se separan cada valor de las celdas usando el \n y los mete como elementos de este arreglo
             no_observation = int(lines[0].split()[0]) #extraccion y alamcenarmiento del número de observación
 
-            chapter = theme = subtheme = "" #inicializacion de las variables que contendrán cada dato importante a extraer
+            chapter = theme = subtheme = procedure = "" #inicializacion de las variables que contendrán cada dato importante a extraer
             observation_lines = [] #arreglo que almacena la descripción de la observación
             legal = None #de momento no es necesrio extraer el fundamento legal
 
@@ -64,6 +63,8 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
                     theme = line.replace("Tema:", "").strip()
                 elif line.startswith("Subtema:"):
                     subtheme = line.replace("Subtema:", "").strip()
+                elif line.startswith("Procedimiento:"):
+                    procedure = line.replace("Procedimiento:", "").strip()
                 elif line.startswith("MARCO LEGAL"):
                     break
                 else:
@@ -76,6 +77,7 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
                 "chapter": chapter,
                 "theme": theme,
                 "subtheme": subtheme,
+                "procedure": procedure,
                 "observation": observation_text,
                 "legal": legal
             })
@@ -88,11 +90,11 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
         return result #retorna el json final
 
 
-def process_directory(input_dir, input_file = None) -> bool:
+def process_directory(input_dir, input_file = None) -> bool:   
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
     if input_file is None:
-        input_file = os.path.join(base_dir, "../input/input.json")
+        input_file = os.path.join(base_dir, "../input/input.json")  # Directorio donde se almacenaran los archivos .json almacenados
         input_file = os.path.abspath(input_file)  
     
     os.makedirs(os.path.dirname(input_file), exist_ok=True)
