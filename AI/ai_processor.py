@@ -46,6 +46,14 @@ class summarize_ai(ai_processor):
     def summarize_observation(self, input_path=None, output_path=None, progress_callback=None, log_callback=None):
         global base_dir
 
+        try:
+            version = subprocess.check_output(["ollama", "--version"], text=True).strip()
+            if version != "ollama version is 0.11.10":
+                log_callback(f"[{version}]...Error, msg Versión incorrecta, por favor instale la version 0.11.10")
+                raise Exception
+        except Exception:
+            return
+
         config_prompt = config["settings"].get("ai_generative_prompt")
         config_model = config["settings"].get("model")
 

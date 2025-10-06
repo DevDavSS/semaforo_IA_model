@@ -190,3 +190,121 @@ INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
 INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
 INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
 INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: ~$doc_1.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: ~$doc_1.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 404 Not Found"
+ERROR:root:Archivo inválido (no .docx): 3440x1440-alpine-v0-6dlgvawovbbe1.jpg
+ERROR:root:Archivo inválido (no .docx): aishot-1341.jpg
+ERROR:root:Archivo inválido (no .docx): balenaEtcher.lnk
+ERROR:root:Archivo inválido (no .docx): desktop.ini
+ERROR:root:Archivo inválido (no .docx): Discord.lnk
+ERROR:root:Archivo inválido (no .docx): Fortnite.url
+ERROR:root:Archivo inválido (no .docx): Franco David - Chrome.lnk
+ERROR:root:Archivo inválido (no .docx): Hell Let Loose.url
+ERROR:root:Archivo inválido (no .docx): Left 4 Dead 2.url
+ERROR:root:Archivo inválido (no .docx): MODS
+ERROR:root:Archivo inválido (no .docx): MSI Afterburner.lnk
+ERROR:root:Archivo inválido (no .docx): nmsmods
+ERROR:root:Archivo inválido (no .docx): No Man's Sky.url
+ERROR:root:Archivo inválido (no .docx): Roblox Player.lnk
+ERROR:root:Archivo inválido (no .docx): Roblox Studio.lnk
+ERROR:root:Archivo inválido (no .docx): Sons Of The Forest.url
+ERROR:root:Archivo inválido (no .docx): WebMultipagos.pdf
+ERROR:root:Archivo inválido (no .docx): wp13245155.webp
+ERROR:root:Archivo inválido (no .docx): µTorrent.lnk
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx
+INFO:root:Procesando archivo: doc_1.docx
+INFO:root:// Archivo procesado: doc_1.docx
+INFO:root:Procesando archivo: doc_2.docx
+INFO:root:// Archivo procesado: doc_2.docx

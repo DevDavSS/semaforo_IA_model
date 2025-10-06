@@ -196,7 +196,7 @@ class MainWindow(QMainWindow):
         self.ai_thread = None  # Clear thread reference
 
         if success:
-            self.results.append("Procesamiento con IA finalizado correctamente.")
+            self.results.append("Procesamiento con IA finalizado.")
         else:
             self.results.append("Hubo un error en el procesamiento con IA.")
 
