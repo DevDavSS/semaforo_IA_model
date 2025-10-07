@@ -2,10 +2,18 @@ import os   #Módulo para navegar por los directorio de windows
 import json #Móduo para generar los archivos de formato .json
 from docx import Document   #Módulo para trabajar y leer documentos de fromato .docx (word)
 import logging
-
+import unicodedata
+import re
 
 logger = logging.getLogger(__name__)  #Manejo de errores y logs durante la ejecución del programa
 logging.basicConfig(filename="Debugging_logs.log", encoding='utf-8', level=logging.DEBUG)
+
+
+def remove_accents(text):
+    return ''.join(
+        c for c in unicodedata.normalize('NFD', text)
+        if unicodedata.category(c) != 'Mn'
+    )
 
 class DocumentProcessor:  #Clase para procesar documentos de tipo docx
     def __init__(self, path: str): #Constructor que recibe como atributos la ruta de los archivos .docx, y declara como atributos globales el nombre del archivo a procesar y el nombre de la entidad que será extraido en la ejecución del programa
@@ -45,8 +53,11 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
         total_text = "\n".join(texts) #Funcion .join para concatenar y separar por medio de in \n cada elemento del arreglo, dando como resultado asi un solo texto junto, pero serparado por \n
 
         # Separar observaciones por “OBSERVACIÓN NO.”
-        obs_chunks = total_text.split("OBSERVACIÓN NO.") #Dada la cadena de texto completa, se hará una división por "chunks" cada nuevo chunk empieza donde se encuentra la palabra "OBSERVACIÓN NO." esto con el objetivo de construir un arreglo en el cada elemento identificado a base de los chunks, represnte cada observación o cada tabla
-
+        normalized_text = remove_accents(total_text)
+        obs_pattern = r"OBSERVACION\s+NO\.?"
+        #obs_chunks = total_text.split("OBSERVACIÓN NO.") 
+        obs_chunks = re.split(obs_pattern, normalized_text, flags=re.IGNORECASE)#Dada la cadena de texto completa, se hará una división por "chunks" cada nuevo chunk empieza donde se encuentra la palabra "OBSERVACIÓN NO." esto con el objetivo de construir un arreglo en el cada elemento identificado a base de los chunks, represnte cada observación o cada tabla
+      
         observations_fetched = [] #Arrelgo que alamcenará diccionarios de cada observación o tabla encontrada
         for chunk in obs_chunks[1:]:  # Se itera cada chunk (observación) con sus cadenas de texto donde se continene los datos importantes 
             lines = chunk.strip().split("\n") #Desde la lina de codigo No.41 se estableció que cada seccion de las tablas o párrafos se depararán con un \n al momenot de concatenar todos los elementos del arreglo total_text, en esta linea se separan cada valor de las celdas usando el \n y los mete como elementos de este arreglo
@@ -59,12 +70,20 @@ class DocumentProcessor:  #Clase para procesar documentos de tipo docx
             for line in lines[1:]: #Se itera el arreglo que contiene como elemnto cada lina del chunk
                 if line.startswith("Capítulo:"): #condicion para revisar si el texto de la lina contiene el string para guardar el dato 
                     chapter = line.replace("Capítulo:", "").strip()
+                if line.startswith("CAPÍTULO:"): #condicion para revisar si el texto de la lina contiene el string para guardar el dato 
+                    chapter = line.replace("CAPÍTULO:", "").strip()
                 elif line.startswith("Tema:"):
                     theme = line.replace("Tema:", "").strip()
+                elif line.startswith("TEMA:"):
+                    theme = line.replace("TEMA:", "").strip()
                 elif line.startswith("Subtema:"):
                     subtheme = line.replace("Subtema:", "").strip()
+                elif line.startswith("SUBTEMA:"):
+                    subtheme = line.replace("SUBTEMA:", "").strip()
                 elif line.startswith("Procedimiento:"):
                     procedure = line.replace("Procedimiento:", "").strip()
+                elif line.startswith("PROCEDIMIENTO:"):
+                    procedure = line.replace("PROCEDIMIENTO:", "").strip()
                 elif line.startswith("MARCO LEGAL"):
                     break
                 else:
